@@ -1,0 +1,242 @@
+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+/*
+ * Copyright (C) 2023 Wingtech Inc.
+ */
+
+&i2c10 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	clock-frequency = <1000000>;
+
+	upm6720_slave@66 {
+		compatible = "unisemi,upm6720";
+		status = "okay";
+		reg = <0x66>;
+		/* Please modify this to upm6720_slave if there is dual upm6720 */
+		rm_name = "upm6720_slave";
+		rm_slave_addr = /bits/ 8 <0x66>;
+		upm6720,intr-gpios = <&pio 10 0x0>;
+		standalone {
+			chg_name = "primary_dvchg";
+			vbatovp = <4430000>;
+			vbatovp_alm = <4400000>;
+			ibatocp = <7500000>;
+			ibatocp_alm = <7400000>;
+			vbusovp = <10000000>;
+			vbusovp_alm = <9000000>;
+			ibusocp = <5000000>;
+			ibusocp_alm = <4900000>;
+			tdie_alm = <1250>; /* 125¡æ */
+			tsbus_flt = <65000>; /* 6.5% */
+			tsbat_flt = <65000>; /* 6.5% */
+			vac1ovp = <12000000>; /* 12V */
+			vac2ovp = <12000000>; /* 12V */
+			fsw_set = <500>; /* 500KhZ */
+			wd_timeout = <30000000>; /* 30s */
+			ibat_rsense = <1>; /* 0: 2mohm, 1: 5mohm */
+			ss_timeout = <10000000>; /* 10s */
+			ibusucpf_deglitch = <5000>; /* 5ms */
+			vout_ovp = <5000>; /* 5000mV */
+			pmid2out_uvp = <100>; /* -100mV */
+			pmid2out_ovp = <300>; /* 300mV */
+			freq_shift = <0>; /* 0, 1: +10%, 2: -10% */
+			/* vbatovp_dis; */
+			/* vbatovp_alm_dis; */
+			ibatocp_dis;
+			ibatocp_alm_dis;
+			ibusucp_dis;
+			/* vbus_errhi_dis; */
+			/* vbus_pd_en; */
+			/* vbusovp_alm_dis; */
+			/* ibusocp_dis; */
+			ibusocp_alm_dis;
+			tshut_dis;
+			tshut_alm_dis;
+			tsbus_flt_dis;
+			tsbat_flt_dis;
+			/* vac1_pd_en; */
+			/* vac2_pd_en; */
+			/* wd_timeout_dis; */
+			/* voutovp_dis; */
+			/* ibusadc_dis; */
+			/* vbusadc_dis; */
+			/* vacadc1_dis; */
+			/* vacadc2_dis; */
+			/* voutadc_dis; */
+			/* vbatadc_dis; */
+			ibatadc_dis;
+			tsbusadc_dis;
+			tsbatadc_dis;
+			/* tdieadc_dis; */
+		};
+		slave {
+			chg_name = "secondary_dvchg";
+			vbatovp = <4500000>;
+			vbatovp_alm = <4400000>;
+			ibatocp = <6100000>;
+			ibatocp_alm = <6000000>;
+			vbusovp = <10000000>;
+			vbusovp_alm = <9000000>;
+			ibusocp = <4250000>;
+			tdie_alm = <1250>; /* 125¡æ */
+			tsbus_flt = <65000>; /* 6.5% */
+			tsbat_flt = <65000>; /* 6.5% */
+			vac1ovp = <12000000>; /* 12V */
+			vac2ovp = <12000000>; /* 12V */
+			fsw_set = <500>; /* 600KhZ */
+			wd_timeout = <30000000>; /* 30s */
+			ibat_rsense = <1>; /* 0: 2mohm, 1: 5mohm */
+			ss_timeout = <10000000>; /* 10s */
+			ibusucpf_deglitch = <5000>; /* 5ms */
+			vout_ovp = <5000>; /* 5000mV */
+			pmid2out_uvp = <100>; /* -100mV */
+			pmid2out_ovp = <300>; /* 300mV */
+			/* vbatovp_dis; */
+			/* vbatovp_alm_dis; */
+			/* ibatocp_dis; */
+			ibatocp_alm_dis;
+			ibusucp_dis;
+			/* vbus_in_range_dis; */
+			/* vbus_pd_en; */
+			/* vbusovp_alm_dis; */
+			/* ibusocp_dis; */
+			tshut_dis;
+			tsbus_flt_dis;
+			tsbat_flt_dis;
+			/* vac1_pd_en; */
+			/* vac2_pd_en; */
+			/* wd_timeout_dis; */
+			/* voutovp_dis; */
+			/* ibusadc_dis; */
+			/* vbusadc_dis; */
+			/* vacadc1_dis; */
+			/* vacadc2_dis; */
+			/* voutadc_dis; */
+			/* vbatadc_dis; */
+			/* ibatadc_dis; */
+			tsbusadc_dis;
+			tsbatadc_dis;
+			/* tdieadc_dis; */
+		};
+	};
+	upm6720_master@65 {
+		compatible = "southchip,upm6720";
+		status = "okay";
+		reg = <0x65>;
+		rm_name = "upm6720_master";
+		rm_slave_addr = /bits/ 8 <0x65>;
+		upm6720,intr-gpios = <&pio 10 0x0>;
+		standalone {
+			chg_name = "primary_dvchg";
+			vbatovp = <4580000>;
+			vbatovp_alm = <4500000>;
+			ibatocp = <6200000>;
+			ibatocp_alm = <6000000>;
+			vbusovp = <11000000>;
+			vbusovp_alm = <10500000>;
+			//+PERIDOT-35, liyiying.wt, 20240305, mod, debug 45w requirement
+			ibusocp = <5000000>;
+			//-PERIDOT-35, liyiying.wt, 20240305, mod, debug 45w requirement
+			tdie_alm = <1250>; /* 125¡æ */
+			tsbus_flt = <65000>; /* 6.5% */
+			tsbat_flt = <65000>; /* 6.5% */
+			vac1ovp = <12000000>; /* 12V */
+			vac2ovp = <12000000>; /* 12V */
+			fsw_set = <500>; /* 500KhZ */
+			wd_timeout = <30000000>; /* 30s */
+			ibat_rsense = <1>; /* 0: 2mohm, 1: 5mohm */
+			ss_timeout = <10000000>; /* 10s */
+			ibusucpf_deglitch = <5000>; /* 5ms */
+			vout_ovp = <5000>; /* 5000mV */
+			pmid2out_uvp = <100>; /* -100mV */
+			pmid2out_ovp = <300>; /* 300mV */
+			/* vbatovp_dis; */
+			/* vbatovp_alm_dis; */
+			//+PERIDOT-35, liyiying.wt, 20240305, mod, debug 45w requirement
+		         ibatocp_dis;
+		         //-PERIDOT-35, liyiying.wt, 20240305, mod, debug 45w requirement
+			ibatocp_alm_dis;
+			ibusucp_dis;
+			/* vbus_in_range_dis; */
+			/* vbus_pd_en; */
+			/* vbusovp_alm_dis; */
+			/* ibusocp_dis; */
+			//+PERIDOT-35, liyiying.wt, 20240305, mod, debug 45w requirement
+			ibusocp_alm_dis;
+			//-PERIDOT-35, liyiying.wt, 20240305, mod, debug 45w requirement
+			tshut_dis;
+			tsbus_flt_dis;
+			tsbat_flt_dis;
+			/* vac1_pd_en; */
+			/* vac2_pd_en; */
+			/* wd_timeout_dis; */
+			/* voutovp_dis; */
+			/* ibusadc_dis; */
+			/* vbusadc_dis; */
+			/* vacadc1_dis; */
+			/* vacadc2_dis; */
+			/* voutadc_dis; */
+			/* vbatadc_dis; */
+			/* ibatadc_dis; */
+			tsbusadc_dis;
+			tsbatadc_dis;
+			/* tdieadc_dis; */
+		};
+		master {
+			chg_name = "primary_dvchg";
+			vbatovp = <4580000>;
+			vbatovp_alm = <4500000>;
+			ibatocp = <6200000>;
+			ibatocp_alm = <6000000>;
+			vbusovp = <11000000>;
+			vbusovp_alm = <10500000>;
+			//+PERIDOT-35, liyiying.wt, 20240305, mod, debug 45w requirement
+			ibusocp = <5000000>;
+			//-PERIDOT-35, liyiying.wt, 20240305, mod, debug 45w requirement
+			tdie_alm = <1250>; /* 125¡æ */
+			tsbus_flt = <65000>; /* 6.5% */
+			tsbat_flt = <65000>; /* 6.5% */
+			vac1ovp = <12000000>; /* 12V */
+			vac2ovp = <12000000>; /* 12V */
+			fsw_set = <500>; /* 500KhZ */
+			wd_timeout = <30000000>; /* 30s */
+			ibat_rsense = <1>; /* 0: 2mohm, 1: 5mohm */
+			ss_timeout = <10000000>; /* 10s */
+			ibusucpf_deglitch = <5000>; /* 5ms */
+			vout_ovp = <5000>; /* 5000mV */
+			pmid2out_uvp = <100>; /* -100mV */
+			pmid2out_ovp = <300>; /* 300mV */
+			/* vbatovp_dis; */
+			/* vbatovp_alm_dis; */
+			//+PERIDOT-35, liyiying.wt, 20240305, mod, debug 45w requirement
+			ibatocp_dis;
+			//-PERIDOT-35, liyiying.wt, 20240305, mod, debug 45w requirement
+			ibatocp_alm_dis;
+			ibusucp_dis;
+			/* vbus_in_range_dis; */
+			/* vbus_pd_en; */
+			/* vbusovp_alm_dis; */
+			/* ibusocp_dis; */
+			//+PERIDOT-35, liyiying.wt, 20240305, mod, debug 45w requirement
+			ibusocp_alm_dis;
+			//-PERIDOT-35, liyiying.wt, 20240305, mod, debug 45w requirement
+			tshut_dis;
+			tsbus_flt_dis;
+			tsbat_flt_dis;
+			/* vac1_pd_en; */
+			/* vac2_pd_en; */
+			/* wd_timeout_dis; */
+			/* voutovp_dis; */
+			/* ibusadc_dis; */
+			/* vbusadc_dis; */
+			/* vacadc1_dis; */
+			/* vacadc2_dis; */
+			/* voutadc_dis; */
+			/* vbatadc_dis; */
+			/* ibatadc_dis; */
+			tsbusadc_dis;
+			tsbatadc_dis;
+			/* tdieadc_dis; */
+		};
+	};
+};

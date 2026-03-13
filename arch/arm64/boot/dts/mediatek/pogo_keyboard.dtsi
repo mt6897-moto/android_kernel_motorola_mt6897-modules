@@ -1,0 +1,81 @@
+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+/*
+ * add tinno keyboard driver dtsi.
+ */
+
+&tn_keyboard {
+    compatible = "tinno,tn_keyboard";
+    plug-gpios = <&pio 26 0x0>;
+    power-en-gpios = <&pio 61 0x0>;
+    uart-wake-gpios = <&pio 40 0x0>;
+    uart-tx-gpios = <&pio 181 0x0>;
+    uart-rx-gpios = <&pio 180 0x0>;
+    tx-en-gpios = <&pio 71 0x0>;
+    pinctrl-names = "uart_tx_set","uart_tx_clear","uart_rx_set","uart_rx_clear","uart_rx_gpio","uart_wake_gpio","uart_wake_clear";
+    pinctrl-0 = <&uart_tx_set>;
+    pinctrl-1 = <&uart_tx_clear>;
+    pinctrl-2 = <&uart_rx_set>;
+	pinctrl-3 = <&uart_rx_clear>;
+	pinctrl-4 = <&uart_rx_gpio>;
+	pinctrl-5 = <&uart_wake_gpio>;
+	pinctrl-6 = <&uart_wake_clear>;
+    //io-channels = <&auxadc 3>;
+    //io-channel-names = "tn_keyboard-ch3";
+    status = "okay";
+};
+
+&pio {
+	uart_tx_set: uart_tx_set {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO181__FUNC_UTXD3>;    
+			slew-rate = <1>;    
+		};
+	};
+
+	uart_tx_clear: uart_tx_clear {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO181__FUNC_GPIO181>;    
+			input-enable;
+			slew-rate = <0>;    
+			bias-disable;
+		};
+	};
+						   
+	uart_rx_set: uart_rx_set {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO180__FUNC_URXD3>;
+			slew-rate = <1>;
+		};
+	};
+
+	uart_rx_clear: uart_rx_clear {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO180__FUNC_GPIO180>;    
+			input-enable;
+			slew-rate = <0>;    
+			bias-disable;
+		};
+	};
+	uart_rx_gpio: uart_rx_gpio {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO180__FUNC_GPIO180>;    
+			slew-rate = <0>;    
+			bias-pull-up;
+		};
+	};
+	uart_wake_gpio: uart_wake_gpio {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO40__FUNC_GPIO40>;    
+			slew-rate = <0>;    
+			bias-pull-up;
+		};
+	};
+	uart_wake_clear: uart_wake_clear {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO40__FUNC_GPIO40>;    
+			input-enable;
+			slew-rate = <0>;    
+			bias-disable;
+		};
+	};
+};

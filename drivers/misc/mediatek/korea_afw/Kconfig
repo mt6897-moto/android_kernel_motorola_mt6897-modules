@@ -1,0 +1,4 @@
+config MICROTRUST_KOREA_AFW_SUPPORT
+	tristate "MICROTRUST korea afw driver"
+	help
+	  This is korea afw driver, it is used to get secure handle

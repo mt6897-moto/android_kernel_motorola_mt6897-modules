@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: GPL-2.0-only
+#
+# Input core configuration
+#
+
+config HX9023S_SAR
+	tristate "Support for hx9023s sar sensor"
+	default y
+	help
+	  Say Y to enable support for TYHX_HX9023S.
+config HX9036_SAR
+	tristate "Support for hx9036 sar sensor"
+	default y
+	help
+	  Say Y to enable support for TYHX_HX9036.
+config SENSORS
+        tristate "Sensors Class Support"
+	default y
+        help
+          This option enables the sensor sysfs class in /sys/class/sensors.
+          You'll need this to do anything useful with sensors. If unsure,say N.
