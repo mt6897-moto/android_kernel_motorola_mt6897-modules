@@ -1,0 +1,9 @@
+menu "Lenovo hyper schedule"
+
+config LENOVO_HYPER_SCHED
+        tristate "Lenovo hyper schedule support"
+        default n
+        help
+            If you want Lenovo hyper sched support,you should say Y or M here.
+
+endmenu

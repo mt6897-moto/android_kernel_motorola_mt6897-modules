@@ -1,0 +1,5 @@
+#
+#Fingerprint
+#
+
+source "$(KCONFIG_EXT_PREFIX)drivers/input/fingerprint/goodix/Kconfig"

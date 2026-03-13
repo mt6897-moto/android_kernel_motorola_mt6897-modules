@@ -1,0 +1,4 @@
+config MICROTRUST_AFW_SUPPORT
+	tristate "MICROTRUST afw driver"
+	help
+	  This is afw driver, it is used to get secure handle from dma-buf

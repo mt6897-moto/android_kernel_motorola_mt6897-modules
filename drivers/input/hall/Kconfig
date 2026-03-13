@@ -1,0 +1,5 @@
+config INPUT_HALL
+	tristate "hall for MediaTek alsps package"
+        default y
+	 help
+         Say Y to enable support for hall.
