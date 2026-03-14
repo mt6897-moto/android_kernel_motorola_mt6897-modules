@@ -72,5 +72,7 @@ define_mgk(
     device_user_modules = mgk_64_k61_device_user_modules,
     platform_device_user_modules = mgk_64_k61_platform_device_user_modules,
     symbol_list = mgk_kmi_symbol_list,
+    dtb_files = ["mt6897.dtb"],
+    dtbo_files = ["cust_mt6897_touch_1840x2944.dtbo","pogo_keyboard.dtbo"]
 )
 

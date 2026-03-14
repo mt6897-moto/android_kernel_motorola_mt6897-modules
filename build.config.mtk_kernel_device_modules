@@ -11,10 +11,20 @@ KCONFIG_EXT_PREFIX=${DEVICE_MODULES_DIR}
 
 MAKE_GOALS="$MAKE_GOALS
 modules
+dtbs
+"
+
+DTS_EXT_DIR=${DEVICE_MODULES_REL_DIR}/arch/arm64/boot/dts/mediatek
+MKDTIMG_DTBOS="
+pogo_keyboard.dtbo
+cust_mt6897_touch_1840x2944.dtbo
 "
 
 # These paths need to be relative to KERNEL_DIR.
-FILES="
+FILES="$FILES
+mt6897.dtb
+cust_mt6897_touch_1840x2944.dtbo
+pogo_keyboard.dtsi
 "
 
 EXT_MODULES+="
